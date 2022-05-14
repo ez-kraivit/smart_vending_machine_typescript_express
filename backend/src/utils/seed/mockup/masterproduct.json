@@ -1,0 +1,18 @@
+[
+    {
+        "_mpid":"MP1234",
+        "_eid":"A123",
+        "topic":"ไวตามิ้ลค์",
+        "subject":"กล่องสีดำ",
+        "descript":"อร่อย ไขมันน้อยเพราะไขมันลงไปในท้องหมดแล้ว",
+        "image_path":"https://www.greenspot.co.th/assets/images/product/product_thumb_26042020120046.png",
+        "cost_price":20,
+        "selling_price":35,
+        "tags":["ไวตามิ้ลค์"],
+        "qty":1,
+        "stock":20,
+        "stock_warning":5,
+        "is_view":true,
+        "is_delete":false
+    }
+]

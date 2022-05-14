@@ -1,0 +1,24 @@
+[
+    {
+        "_eid":"A123",
+        "name":"kraivit",
+        "lastname":"mongkhonsakunrit",
+        "phone":"0885530057",
+        "email":"kraivit@ku.th",
+        "username":"kraivit",
+        "password":"12345678",
+        "role":1,
+        "is_verify":true
+    },
+    {
+        "_eid":"A423",
+        "name":"vit",
+        "lastname":"mongkhonsakunrit",
+        "phone":"0847611228",
+        "email":"vit@ku.th",
+        "username":"vit",
+        "password":"12345678",
+        "role":0,
+        "is_verify":true
+    }
+]

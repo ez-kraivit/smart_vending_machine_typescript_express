@@ -1,0 +1,14 @@
+[
+    {
+        "_cid":"C123",
+        "name":"kraivit",
+        "lastname":"mongkhonsakunrit",
+        "phone":"0885530057",
+        "email":"kraivit@ku.th",
+        "username":"kraivit",
+        "password":"12345678",
+        "role":0,
+        "recommend":"M1234",
+        "is_verify":true
+    }
+]
