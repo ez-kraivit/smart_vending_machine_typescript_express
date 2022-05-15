@@ -56,6 +56,17 @@ yarn
 yarn dev
 ```
 
+## API เติมเงินเข้าตู้หยอดเหรียญ
+```
+curl --location --request POST 'localhost:5230/api/v1/deposit' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "_mid":"M123", //เครื่องหยอดเหรียญนั้น ๆ หากมีหลายสาขาก็หลายรหัส
+    "_tid":"2KpmkV9jUA3MuSm", //นำมาจาก FE Query ตอนกดสินค้านั้น ๆ 
+    "balance": 10 // ำนวนเงินที่เติมเข้าระบบ
+}'
+```
+
 ## ปลั๊กอินที่ใช้ในส่วน BackEnd
 
 มีสองทางเลือกในการใช้ปลั๊กอิน ลดเวลาในการเขียนเองและมีบางส่วนเขียนเองเช่นกัน
