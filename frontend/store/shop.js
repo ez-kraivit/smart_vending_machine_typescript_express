@@ -7,7 +7,9 @@ export default {
   state: _ => ({
     StateProcessProductDialog:false ,
     StateProcessTankDialog:false ,
+    StateProcessRefundDialog:false,
     selectProduct: {},
+    SelectChangeMoney: {},
     transactionID: "",
     total: 0,
   }),
@@ -19,8 +21,14 @@ export default {
     setProcessProductDialog(state,data){
       state.StateProcessProductDialog = data;
     },
+    setSelectChangeMoney(state,data){
+      state.SelectChangeMoney = data;
+    },
     setProcessTankDialog(state,data){
       state.StateProcessTankDialog = data;
+    },
+    setProcessRefundDialog(state,data){
+      state.StateProcessRefundDialog = data;
     },
     setTransactionID(state,data){
       state.transactionID = data;
@@ -48,6 +56,10 @@ export default {
     async getRefund(_,payload){
       await $axios.post(`/withdraw/refund`,payload)
       return true
+    },
+    async getTransactionOrderCheck(_,payload){
+      const currentData = await $axios.post(`/transaction-order/check`,payload);
+      return currentData.data || {}
     },
   }
 }
