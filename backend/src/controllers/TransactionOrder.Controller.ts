@@ -181,6 +181,8 @@ export default {
                 }
                 const currentDrawer = cutDrawerLength(drawer)
                 if(currentDrawer.cancel) {
+                    currentData.is_refund = true
+                    await new TransactionOrderRepository(dataSource).update(<{[I:string]:any}>currentData);
                     message = { data:null, message: '', error: 'Insufficient balance!' }
                     this.res.json(message)
                 }
