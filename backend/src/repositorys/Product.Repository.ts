@@ -16,7 +16,7 @@ export default class ProductRepository {
     }
 
     async get(id: string): Promise<ProductMigration> {
-        return this.Repository.findOne({ where: { id: id, is_delete: false } });
+        return this.Repository.findOne({ where: { _pid: id, is_delete: false } });
     }
 
     async getLists(page: number = 0, limit: number = 50): Promise<Object> {
