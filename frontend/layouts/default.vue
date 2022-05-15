@@ -2,6 +2,7 @@
   <v-app :style="{background: $vuetify.theme.themes['light'].dg5}">
     <ProcessDialogProduct></ProcessDialogProduct>
     <ProcessThankDialog></ProcessThankDialog>
+    <ProcessRefundDialog></ProcessRefundDialog>
     <Nuxt v-if="$vuetify.breakpoint.lgAndUp" />
     <v-container v-else class="justify-center"  fill-height  :style="{background: $vuetify.theme.themes['light'].dg5}" >
       <v-row no-gutters >
