@@ -1,4 +1,4 @@
-import { Entity, PrimaryColumn, Column, CreateDateColumn, UpdateDateColumn , ManyToOne, JoinColumn  } from "typeorm";
+import { Entity, PrimaryColumn, Column, CreateDateColumn, UpdateDateColumn , OneToOne, JoinColumn  } from "typeorm";
 
 import MedalMachineMigration from "./MedalMachine.Migration";
 
@@ -7,7 +7,7 @@ export default class DrawerMigration  {
     @PrimaryColumn({ length:15})
     _dwid?: string;
 
-    @ManyToOne(() => MedalMachineMigration , medal_machine => medal_machine._mid) @JoinColumn({ name: "_mid" , referencedColumnName: "_mid" })
+    @OneToOne(() => MedalMachineMigration , medal_machine => medal_machine._mid) @JoinColumn({ name: "_mid" , referencedColumnName: "_mid" })
     _mid?: MedalMachineMigration | null;
 
     @Column({ type: 'decimal', precision: 22, scale: 2, default: 0   })
@@ -21,9 +21,15 @@ export default class DrawerMigration  {
     
     @Column({ type: 'decimal', precision: 22, scale: 2, default: 0   })
     five_coin?: number;
+
+    @Column({ type: 'decimal', precision: 22, scale: 2, default: 0   })
+    ten_coin?: number;
     
     @Column({ type: 'decimal', precision: 22, scale: 2, default: 0   })
     twenty_coin?: number;
+    
+    @Column({ type: 'decimal', precision: 22, scale: 2, default: 0   })
+    fifty_coin?: number;
     
     @Column({ type: 'decimal', precision: 22, scale: 2, default: 0   })
     one_hundred_coin?: number;

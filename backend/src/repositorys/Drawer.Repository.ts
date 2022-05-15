@@ -16,7 +16,7 @@ export default class DrawerRepository {
     }
 
     async get(id: string):Promise<DrawerMigration>  {
-        return this.Repository.findOne({  where: {  id:id , is_delete: false } });
+        return this.Repository.findOne({  where: {  _mid:id } });
     }
     
     async insert(request:{[I:string]:string|boolean}): Promise<DrawerMigration> { 
