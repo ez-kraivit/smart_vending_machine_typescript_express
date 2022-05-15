@@ -12,7 +12,7 @@
       <h2>กรุณาหยอดเงินเข้าตู้</h2>
       <h3 class="mb-1">จำนวนตอนนี้ {{renderNumber(total)}} บาท </h3>
       <v-card-actions class="text-center justify-center">
-        <v-btn color="error" outlined text rounded v-on:click="closeDialog()">ยกเลิกรายการ</v-btn>
+        <v-btn color="error" outlined text rounded @click="closeDialog()">ยกเลิกรายการ</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -42,29 +42,46 @@ export default {
     async StateProcessProductDialog(val){
       if(val){
         await this.getTransactionOrder({_mid: "M123",product_order: [this.selectProduct._pid]})
-        console.log(this.transactionID);
+        this.$router.push({path: '/', query: {id: this.transactionID}})
         this.countDownDate()
       }else{
-        this.closeDialog()
-      }
-    },
-    total(val){
-      if(val > this.selectProduct.selling_price) {
-        console.log('เงินมากกว่า');
-        // this.closeDialog();
-      }
-      if(val === this.selectProduct.selling_price) {
-        this.setProcessProductDialog(false)
-        this.setSelectProduct({})
+        this.setProcessProductDialog(false);
+        // this.setSelectProduct({});
         this.setTransactionID('');
         this.setTotal(0);
         document.getElementById("demo").innerHTML = "";
-        clearInterval(this.myInterval)
-        this.setProcessTankDialog(true)
-        setTimeout(() => {
-          this.setProcessTankDialog(false)
-        }, 3000);
       }
+    },
+     async total(val){
+        if(Number(val) > Number(this.selectProduct.selling_price)) {
+          const currentData =  await this.getTransactionOrderCheck({_tid:this.transactionID})
+          this.setSelectChangeMoney(currentData)
+          this.setProcessProductDialog(false);
+          this.setTransactionID('');
+          this.setTotal(0);
+          document.getElementById("demo").innerHTML = "";
+          clearInterval(this.myInterval);
+          this.setProcessTankDialog(true);
+          setTimeout(() => {
+            this.setProcessTankDialog(false);
+            this.setSelectChangeMoney({})
+            this.setSelectProduct({});
+            this.$router.push({path: '/'})
+          }, 10000);
+        }
+        if(Number(val) === Number(this.selectProduct.selling_price)) {
+          this.setProcessProductDialog(false);
+          this.setTransactionID('');
+          this.setTotal(0);
+          document.getElementById("demo").innerHTML = "";
+          clearInterval(this.myInterval);
+          this.setProcessTankDialog(true);
+          setTimeout(() => {
+            this.setProcessTankDialog(false);
+            this.setSelectProduct({});
+            this.$router.push({path: '/'})
+          }, 3000);
+        }
     },
 
   },
@@ -72,12 +89,13 @@ export default {
     ...mapState('shop',['StateProcessProductDialog','selectProduct','transactionID','total']),
   },
   methods: {
-    ...mapActions('shop',['getTransactionOrder','getTransactionOrderBalance','getRefund']),
-    ...mapMutations('shop',['setProcessProductDialog','setSelectProduct','setTransactionID','setTotal','setProcessTankDialog']),
+    ...mapActions('shop',['getTransactionOrder','getTransactionOrderBalance','getRefund','getTransactionOrderCheck']),
+    ...mapMutations('shop',['setProcessProductDialog','setSelectProduct','setTransactionID','setTotal','setProcessTankDialog','setSelectChangeMoney']),
     renderNumber(price){
       return Number.parseInt(price)
     },
     async closeDialog() {
+      this.setSelectChangeMoney({})
       if(this.total.length>0) await this.getRefund({_tid:this.transactionID});
       this.setProcessProductDialog(false);
       this.setSelectProduct({});
@@ -85,6 +103,7 @@ export default {
       this.setTotal(0);
       document.getElementById("demo").innerHTML = "";
       clearInterval(this.myInterval);
+      this.$router.push({path: '/'})
     },
     countDownDate(){
       this.countDate = new Date().setTime(new Date().getTime() + (3 * 60 * 1000));
