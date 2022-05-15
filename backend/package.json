@@ -9,6 +9,7 @@
     "seed": "env-cmd -f configs/dev.env ts-node src/utils/seed/index.ts",
     "build:dev": "env-cmd -f configs/dev.env node build/src/index.js",
     "docker": "node build/src/index.js",
+    "docker:server": "node build/src/index.js",
     "build": "rm -rf build && tsc -b"
   },
   "keywords": [],
