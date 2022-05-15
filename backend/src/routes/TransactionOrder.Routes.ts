@@ -5,7 +5,7 @@ import Register from "../utils/ExpressServer/Register"
 import config from "../cores/Base.Env.Interface"
 
 import middlewareSystem from "../utils/Middleware/system"
-import { balanceVaildation,listsVaildation, insertVaildation, updateVaildation, deleteVaildation } from "../vaildations/TransactionOrder.Vaildation"
+import { balanceVaildation,listsVaildation, insertVaildation, updateVaildation, deleteVaildation, checkPaymentVaildation } from "../vaildations/TransactionOrder.Vaildation"
 
 const route = express.Router();
 const routePath = `/${config.apiPrefix}/transaction-order`
@@ -34,6 +34,14 @@ const MInsert = (req: Request, res: Response, next: NextFunction) => middlewareS
 route.post(`${routePath}`,MInsert, async (req: Request, res: Response, next: NextFunction) => {
     const app = await Register.app(`${controllerName}`)    
     new app(req, res, next).insert()
+})
+
+/** Transaction Order Insert */
+const OCheckPayment = { name: 'general', validate: { body: checkPaymentVaildation } }
+const MCheckPayment = (req: Request, res: Response, next: NextFunction) => middlewareSystem({ req, res, next }, OCheckPayment)
+route.post(`${routePath}/check`,MCheckPayment, async (req: Request, res: Response, next: NextFunction) => {
+    const app = await Register.app(`${controllerName}`)    
+    new app(req, res, next).checkPayment()
 })
 
 /** Transaction Order Update */
