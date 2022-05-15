@@ -28,3 +28,7 @@ export const updateVaildation = Joi.object({
 export const deleteVaildation = Joi.object({
     _tid : Joi.string().min(0).max(15).trim().required()
 })
+
+export const checkPaymentVaildation = Joi.object({
+    _tid : Joi.string().min(0).max(15).trim().required()
+})

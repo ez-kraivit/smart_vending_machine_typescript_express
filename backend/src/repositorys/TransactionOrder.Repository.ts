@@ -15,7 +15,7 @@ export default class TransactionOrderRepository {
         return await this.Repository.find({ where: { is_delete: false } });
     }
 
-    async get(id: string): Promise<TransactionOrderMigration> {
+    async getCheck(id: string): Promise<TransactionOrderMigration> {
         return this.Repository.findOne({ where: { _tid: id, is_delete: false } });
     }
 
@@ -31,11 +31,11 @@ export default class TransactionOrderRepository {
         return { list, count, page, pageSize: limit };
     }
 
-    async insert(request: { [key: string]: string | boolean }): Promise<TransactionOrderMigration> {
+    async insert(request: { [key: string]: string | boolean | any }): Promise<TransactionOrderMigration> {
         return this.Repository.insert(request);
     }
 
-    async update(request: { [key: string]: string | boolean }): Promise<TransactionOrderMigration> {
+    async update(request: { [key: string]: string | boolean | string[] }): Promise<TransactionOrderMigration> {
         if (Array.isArray(request)) request.map((element: { updated_at: Date }) => {
             element.updated_at = new Date();
         })

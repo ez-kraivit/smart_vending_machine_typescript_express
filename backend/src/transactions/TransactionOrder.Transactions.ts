@@ -13,13 +13,13 @@ export default class TransactionOrderTransactions {
         this.manager = dataSource;      
     }
 
-    async depositInTransaction(deposit:{[I:string]:string|boolean|number}){
+    async depositInTransaction(deposit:{[I:string]:string|boolean|number|any|Array<string>}){
         return await this.manager.transaction(async (transactionalManager:any) => {
             deposit._did = RandomId.generateid('base62', 15)
-            await transactionalManager.insert(DepositMigration,deposit)
+            await transactionalManager.insert(DepositMigration,deposit)            
             let currentTransactionOrder = await transactionalManager.findOne(TransactionOrderMigration,{where:{_tid:deposit._tid}})
             currentTransactionOrder.balance = new Bigjs().calculator(currentTransactionOrder.balance, "+", <number>deposit.balance).toNumber()
-            currentTransactionOrder.drawer_order.push(deposit._did)
+            currentTransactionOrder.deposit_order.push(deposit._did)
             await transactionalManager.save(TransactionOrderMigration,currentTransactionOrder)
         }).then((data)=>{
             return data
