@@ -52,7 +52,7 @@ export default {
             let message = { data:<Object|null>null, message: 'Insert TransactionOrder Fail!', error: <null|string>null }
             const currentData = await new TransactionOrderRepository(dataSource).getCheck(<string>this.body._tid)
             let drawer:any = await new DrawerRepository(dataSource).get(<any>currentData._mid)
-            if(currentData.balance > currentData.total){
+            if(Number(currentData.balance) > Number(currentData.total)){
                 const cutDrawerLength = (data:any) => {
                     let count = 0
                     let numpay:any = []
@@ -193,7 +193,7 @@ export default {
                     message = { data:currentDrawer.pay_lists, message: 'Transaction paid successfully!' , error: null }
                 }
             }
-            if(currentData.balance === currentData.total){
+            if(Number(currentData.balance) === Number(currentData.total)){
                 currentData.is_payment = true
                 currentData.payment_at = new Date()
                 await new TransactionOrderRepository(dataSource).update(<{[I:string]:any}>currentData);
