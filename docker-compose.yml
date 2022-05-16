@@ -1,0 +1,27 @@
+version: '3.3'
+services:
+    frontend:
+        container_name: frontend
+        restart: unless-stopped
+        build:
+            context: .
+            dockerfile: frontend/Dockerfile
+        ports:
+            - 3000:3000
+    backend:
+        container_name: backend
+        restart: unless-stopped
+        environment:
+            - PORT=5230
+            - CORS=true
+            - APIPREFIX=api/v1
+            - POSTGRES__HOST=0.0.0.0
+            - POSTGRES__USERNAME=postgres
+            - POSTGRES__PASSWORD=postgres
+            - POSTGRES__PORT=56521
+            - POSTGRES__SCHEMA=public
+        build:
+            context: .
+            dockerfile: backend/Dockerfile
+        ports:
+            - 5230:5230
