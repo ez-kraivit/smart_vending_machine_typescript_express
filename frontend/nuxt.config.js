@@ -45,8 +45,8 @@ export default {
   },
 
   axios: {
-    proxy: true
-    // proxy: false
+    // proxy: true
+    proxy: false
   },
   proxy:{
     '/api/v1': { target: 'http://localhost:5230/api/v1', pathRewrite: { '^/api/v1': '' } }
@@ -54,7 +54,7 @@ export default {
   env:{
     api_url_dev : "/api/v1",
     api_url_prod : "http://localhost:5230/api/v1",
-    argv:'dev'
+    argv:'prod'
   },
   vuetify: {
     customVariables: ['~/assets/variables.scss'],

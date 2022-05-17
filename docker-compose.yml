@@ -15,7 +15,7 @@ services:
             - PORT=5230
             - CORS=true
             - APIPREFIX=api/v1
-            - POSTGRES__HOST=0.0.0.0
+            - POSTGRES__HOST=docker.for.mac.localhost
             - POSTGRES__USERNAME=postgres
             - POSTGRES__PASSWORD=postgres
             - POSTGRES__PORT=56521

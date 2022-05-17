@@ -1,8 +1,14 @@
-FROM node:14.18.2-buster-slim as builder
-WORKDIR /usr/app
-COPY package.json ./
+FROM node:14.18.3-alpine3.15 as builder 
+WORKDIR /app
+COPY backend/package.json /app
+RUN npm install 
+COPY backend/. /app
+RUN npm run build
+COPY backend/src/public /app/build/src/public
 RUN npm install --production
-COPY build/ ./build/
-WORKDIR ./build
+
+FROM node:14.18.3-alpine3.15
+WORKDIR /app
+COPY --from=builder /app /app
 EXPOSE 5230
-CMD ["npm","run","docker:server"]
+ENTRYPOINT ["npm","run","docker:server"]

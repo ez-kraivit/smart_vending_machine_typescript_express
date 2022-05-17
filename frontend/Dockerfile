@@ -1,17 +1,14 @@
-FROM node:14
-
-# Create app directory
+FROM node:14.18.2-alpine
 WORKDIR /app
-ADD . /app/
+COPY frontend/. /app/
 
-# global install & update
-RUN npm i -g npm && npm i -g yarn
+RUN apk update && apk upgrade
 
-RUN rm yarn.lock
-RUN yarn
-RUN yarn build
+RUN npm install
+
+RUN npm run build
 
 ENV HOST 0.0.0.0
+EXPOSE 3000
 
-# start command
-CMD [ "yarn", "start" ]
+CMD [ "npm","start" ]

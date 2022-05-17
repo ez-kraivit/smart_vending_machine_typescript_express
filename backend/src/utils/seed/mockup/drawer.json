@@ -2,15 +2,15 @@
     {
         "_dwid":"DW123",
         "_mid":"M123",
-        "one_coin":1000,
-        "two_coin":500,
-        "five_coin":200,
-        "ten_coin":100,
-        "twenty_coin":50,
-        "fifty_coin":20,
-        "one_hundred_coin":10,
-        "five_hundred_coin":2,
-        "one_thosand_coin":1,
+        "one_coin":10000,
+        "two_coin":5000,
+        "five_coin":2000,
+        "ten_coin":1000,
+        "twenty_coin":500,
+        "fifty_coin":200,
+        "one_hundred_coin":100,
+        "five_hundred_coin":200,
+        "one_thosand_coin":100,
         "balance":7000
     }
 ]
