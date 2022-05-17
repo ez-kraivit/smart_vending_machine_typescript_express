@@ -1,5 +1,15 @@
 version: '3.3'
 services:
+    db_note:
+        image: postgres:12
+        restart: always
+        ports:
+        - "56521:5432"
+        environment:
+            - TZ=Asia/Bangkok
+            - POSTGRES_PASSWORD=postgres
+        volumes:
+        - ./data:/var/lib/postgresql/data
     frontend:
         container_name: frontend
         restart: unless-stopped
