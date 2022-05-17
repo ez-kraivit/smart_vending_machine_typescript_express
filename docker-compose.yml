@@ -9,7 +9,7 @@ services:
             - TZ=Asia/Bangkok
             - POSTGRES_PASSWORD=postgres
         volumes:
-        - ./data:/var/lib/postgresql/data
+        - ./postgres/data:/var/lib/postgresql/data
     frontend:
         container_name: frontend
         restart: unless-stopped
